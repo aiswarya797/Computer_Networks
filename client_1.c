@@ -21,7 +21,8 @@ int main(int argc, char* argv[])
 {
 	int sockfd;	//Socket of the client
 	struct sockaddr_in servaddr;	//Server address is stored in servaddr
-	char sendline, recvline;
+	char sendline[MAXLINE], recvline[MAXLINE];
+	//char buf[MAXLINE]
 	
 	if(argc != 2)
 	{
@@ -55,11 +56,11 @@ int main(int argc, char* argv[])
 	
 	//get input : loop 
 	
-	while(fgets(sendline, MAXLINE, stdin) != NULL)
+	while(fgets(sendline, MAXLINE, stdin)>0)
 	{
 		send(sockfd, sendline, strlen(sendline), 0);
 		
-		if(recv(sockfd, recvline, strlen(recvline), 0) == 0)
+		if(recv(sockfd, recvline, MAXLINE, 0) == 0)
 		{
 			perror("Server terminated");
 			exit(4);
