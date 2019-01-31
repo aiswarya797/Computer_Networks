@@ -45,13 +45,13 @@ int main(int argc, char* argv[])
 	//Listening
 	
 	listen(serverfd, Max_Listen);
-	printf("Server is up and running ... waiting for clients");
+	printf("%s\n","Server is up and running ... waiting for clients");
 	
 	for(; ;)
 	{
 		clienlen = sizeof(clientaddr);
 		acceptfd = accept(serverfd, (struct sockaddr*)(&clientaddr), &clienlen); //Accept the client with client address = clentaddr.
-		printf("Received Response");
+		printf("%s\n","Received Response");
 		
 		while( (n=recv(acceptfd, buf, MAXLINE, 0)) >0)
 		{
